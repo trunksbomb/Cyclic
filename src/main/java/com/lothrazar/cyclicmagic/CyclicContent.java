@@ -105,6 +105,7 @@ import com.lothrazar.cyclicmagic.item.equipbauble.ItemCharmSlowfall;
 import com.lothrazar.cyclicmagic.item.equipbauble.ItemCharmSpeed;
 import com.lothrazar.cyclicmagic.item.equipbauble.ItemCharmVoid;
 import com.lothrazar.cyclicmagic.item.equipbauble.ItemCharmWater;
+import com.lothrazar.cyclicmagic.item.equipbauble.ItemCharmRepel;
 import com.lothrazar.cyclicmagic.item.equipbauble.ItemGloveClimb;
 import com.lothrazar.cyclicmagic.item.findspawner.ItemProjectileDungeon;
 import com.lothrazar.cyclicmagic.item.homingmissile.ItemMagicMissile;
@@ -221,6 +222,7 @@ public class CyclicContent {
     content.add(new ItemCharmFire());
     content.add(new ItemCharmSpeed());
     content.add(new ItemCharmSlowfall());
+    content.add(new ItemCharmRepel());
     content.add(new ItemAppleStep());
     content.add(new ItemStirrupsReverse());
     content.add(new ItemHorseTame());
