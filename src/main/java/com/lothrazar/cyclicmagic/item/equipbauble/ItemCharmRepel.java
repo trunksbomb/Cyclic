@@ -100,7 +100,6 @@ public class ItemCharmRepel extends BaseCharm implements IHasRecipeAndRepair, IC
           if (((EntityLiving) entity).hurtTime == 0 && player.canEntityBeSeen(entity)) {
             Vec3d entityVec3d = entity.getPositionVector();
             float angle = UtilEntity.yawDegreesBetweenPoints(playerVec3d.x,playerVec3d.y,playerVec3d.z, entityVec3d.x, entityVec3d.y, entityVec3d.z);
-            entity.setVelocity(0,0,0);
             entity.addVelocity((double)(MathHelper.sin(angle * 0.017453292F)), 0.1D, (double)(MathHelper.cos(angle * 0.017453292F)));
             entity.attackEntityFrom(thornDamage, 0);
             UtilParticle.spawnParticle(world, EnumParticleTypes.DAMAGE_INDICATOR, entity.getPosition());
