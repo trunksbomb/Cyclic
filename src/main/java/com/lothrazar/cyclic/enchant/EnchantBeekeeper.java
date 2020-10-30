@@ -24,9 +24,11 @@
 package com.lothrazar.cyclic.enchant;
 
 import com.lothrazar.cyclic.base.EnchantBase;
+import com.lothrazar.cyclic.util.UtilEntity;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -38,7 +40,11 @@ import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.List;
+
 public class EnchantBeekeeper extends EnchantBase {
+
+  private static final int MAX_RANGE = 8;
 
   public EnchantBeekeeper(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType... slots) {
     super(rarityIn, typeIn, slots);
@@ -81,6 +87,22 @@ public class EnchantBeekeeper extends EnchantBase {
         bee.setAngerTarget(null);
         //        ModCyclic.LOGGER.info("no hurt me");
         event.setResult(Result.DENY);
+      }
+    }
+  }
+
+  @Override
+  public void onUserHurt(LivingEntity user, Entity attacker, int level) {
+    if (level < 2)
+      return;
+    List<Entity> nearbyEntities = user.world.getEntitiesWithinAABB(BeeEntity.class, UtilEntity.makeBoundingBox(user.getPosition(), MAX_RANGE, MAX_RANGE));
+    for (Entity e : nearbyEntities) {
+      if (e instanceof BeeEntity && attacker instanceof LivingEntity) {
+        BeeEntity bee = (BeeEntity) e;
+        bee.setAngerTarget(attacker.getUniqueID());
+        bee.setAttackTarget((LivingEntity) attacker);
+        bee.setAngerTime(20 * 20);
+        bee.setAggroed(true);
       }
     }
   }
